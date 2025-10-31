@@ -2,6 +2,7 @@
 The offical pytorch code for the paper "Learning Interval-Aware Embedding for Macro- and Micro-expression Spotting" 
 # Citation
 If you find our research useful, please consider citing:
+
 @InProceedings{Li_2024_ACCV,
     author    = {Li, Xiaodong and Li, Jiajun and Du, Wenchao and Chen, Hu and Yang, Hongyu},
     title     = {Learning Interval-Aware Embedding for Macro- and Micro-expression Spotting},
