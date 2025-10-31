@@ -1,0 +1,82 @@
+BASIC:
+  ROOT_DIR: "/home/geek/spot/New_Code_2_3/IAENet_CNN/"
+  WORKERS: 4
+  BACKUP_CODES: True
+  BACKUP_LISTS: ['lib', 'experiments', 'tools']
+  SAVE_PREDICT_RESULT: False
+  CREATE_OUTPUT_DIR: True
+
+DATASET:
+  FEAT_DIR: "/data/datasets/spot/casme2/IAENet/CA2_trans_8_128/val_test/"
+  TRAIN_SPLIT: 'train'
+  VAL_SPLIT: 'test'
+  DATASET_NAME: cas(me)^2
+  WINDOW_SIZE: 128
+  SAMPLE_STRIDE: 2
+  NUM_CLASSES: 2
+  CLASS_IDX: [0, 1, 2]
+  OVERLAP_RATIO_TH: 0.9
+  MAX_SEGMENT_NUM: 28
+  PIN_MEMORY: True
+
+MODEL:
+  SCALE: False
+  WINDOW_LENGTH: 8
+  IN_FEAT_DIM: 2048
+  BASE_FEAT_DIM: 512
+  REDU_CHA_DIM: 512
+  HEAD_DIM: 256
+  HEAD_LAYERS: 2
+  NUM_LAYERS: 3
+  LAYER_DIMS: [512, 512, 1024]
+  LAYER_STRIDES: [1, 2, 2]
+  TEMPORAL_LENGTH: [16, 8, 4]
+  TEMPORAL_STRIDE: [8, 16, 32]
+  NORM_ON_BBOX: True
+  B_DOWN_FOUR: True
+
+TRAIN:
+  WEIGHT_DECAY: 0
+  LR: 0.0002
+  BATCH_SIZE: 128
+  END_EPOCH: 30
+  WARM_UP_EPOCH: 5
+  FG_TH: 0.5
+  BG_TH: 0.4
+  NEGATIVE_RATIO: 1
+  MODELS_DIR: ''
+  LOG_FILE: 'train_loss.log'
+  MODEL_DIR: 'output/version_cas2_lamda_0.05_0/'
+  REGRESS_RANGES: [[0, 14], [14, 32], [16, 128]]
+  CENTER_SAMPLING: False
+  CENTER_SAMPLE_RADIUS: [1.0, 2.0, 2.0, 2.0]
+  CENTER_SAMPLE_ALPHA: 1.5
+  ALPHA: [[0.25, 0.25]]
+  ENHANCE_TIMES: 4
+  # factors for each loss
+  ENHANCE_REG: 0.05
+  ENHANCE_CLS: 1.0
+
+
+TEST:
+  BATCH_SIZE: 128
+  EVAL_INTERVAL: 1
+  TOP_K_RPOPOSAL_MAE: 30
+  TOP_K_RPOPOSAL_ME: 30
+  # 0: NMS
+  # 1: WBF
+  NMS_FALG: 0
+  NMS_ALL: True
+  # parameters for nms
+  NMS_TH: 0.01
+  # parameters for wbf
+  WBF_NMS_TH: 0.01
+  WBF_SKIP_TH: 0.37
+  WBF_REWEIGHT_FACTOR: 2.0
+  FILTER_NEGATIVE_TH: 0.98
+  FILTER_CONF_TH: 0.1
+  # assign cliffDiving instance as diving
+  PREDICT_CSV_FILE: 'output/cas(me)^2_new/prediction' #这个参数暂时不用
+  PREDICT_TXT_FILE: 'test_detection'
+  OUTDF_COLUMNS_AF: ['video_name', 'cate_idx', 'conf', 'xmax', 'xmin']
+
